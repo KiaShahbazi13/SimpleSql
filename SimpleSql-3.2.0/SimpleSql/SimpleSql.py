@@ -129,7 +129,6 @@ class Sql():
         --condition_sep_oprs [] = the comparison-oprators for seperating conditions e.g: ["and","or"] \n
         '''
 
-            exe = f"UPDATE '{table_name}' set {column}='{new_value}'"
         exe = f"UPDATE '{table_name}' set {column}='{new_value}'"
         
         if "condition_columns" in kwargs.keys():
