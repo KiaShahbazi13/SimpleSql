@@ -55,10 +55,6 @@ class Sql():
         v_num = number of values e.g: '?,?,?,...'\n
         values = the values(1,...) e.g: (123,32,)
         '''
-        print()
-        print(f"sql query:")
-        print(f"INSERT INTO {table_name} ({columns}) VALUES ({v_num})",values)
-        print()
         self.cur.execute(f"INSERT INTO {table_name} ({columns}) VALUES ({v_num})",values)
         self.con.commit()
     
@@ -121,24 +117,20 @@ class Sql():
             return None
         return return_value
 
-    def sql_update(self, table_name:str, column:str, new_value, all=True, **kwargs) -> None:
+    def sql_update(self, table_name:str, column:str, new_value, **kwargs) -> None:
         '''
         table_name = the name of the table\n
         column = the name of the column we want to change a item of\n
         new_value = the new value for the changed item\n
-        all = update all records (True OR False) \n
-        -if False : \n
-        --kwargs : \n
-        ---condition_columns  [] = the name of column the condition is on it \n
-        ---condition_values   [] = the value for condition \n
-        ---condition_oprs     [] = the comparison-oprators for condition e.g: ["=",">"] \n
-        ---condition_sep_oprs [] = the comparison-oprators for seperating conditions e.g: ["and","or"] \n
+        -kwargs : \n
+        --condition_columns  [] = the name of column the condition is on it \n
+        --condition_values   [] = the value for condition \n
+        --condition_oprs     [] = the comparison-oprators for condition e.g: ["=",">"] \n
+        --condition_sep_oprs [] = the comparison-oprators for seperating conditions e.g: ["and","or"] \n
         '''
 
-        if all == True:
             exe = f"UPDATE '{table_name}' set {column}='{new_value}'"
-        else:
-            exe = f"UPDATE '{table_name}' set"
+        exe = f"UPDATE '{table_name}' set {column}='{new_value}'"
         
         if "condition_columns" in kwargs.keys():
             cond_columns = kwargs["condition_columns"]
